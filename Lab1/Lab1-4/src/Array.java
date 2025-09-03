@@ -80,6 +80,29 @@ public class Array {
         System.out.println("\nArray load is " + load);
     }
 
+    // Ex5
+    // Method to find a pair with sum in the ascending array
+    boolean findPairWithSum(int sum) {
+        if (load<2)
+            return false;
+
+        // Using two pointers approach
+        int left = 0;
+        int right = load-1;
+
+        while (left<right) {
+            int currentSum = A[left] + A[right];
+            if (currentSum == sum) {
+                return true; // Pair found
+            } else if (currentSum < sum) {
+                left++; // Move left pointer to the right
+            } else {
+                right--; // Move right pointer to the left
+            }
+        }
+        return false; // No pair found
+    }
+
     public static void main(String[] args) {
         Array A = new Array(10);
 
@@ -149,6 +172,20 @@ public class Array {
          A.getElementAtIndex(1));
          System.out.println("Correct Answer is\nValue at A[1]= 7");
 
+        //optional
+        // Uncomment this section to test Ex 5
+
+         System.out.println("----------------------------------"); A.addLast(7);
+         A.addLast(9); A.addLast(9); A.addLast(11); A.addLast(11); A.addLast(11);
+         System.out.println("After adding 7, 9, 9, 11, 11, 11 to A");
+         System.out.println("Your Answer is"); A.printArray();
+         System.out.println("Correct Answer is\n6 7 7 9 9 11 11 11 \nArray load is 8"
+         );
+
+         System.out.println("----------------------------------"); int sum = 20;
+         System.out.println("Your Answer for findPairWithSum(" + sum + "): " +
+         A.findPairWithSum(sum));
+         System.out.println("Correct Answer for findPairWithSum(" + sum + "): true");
 
     }
 
