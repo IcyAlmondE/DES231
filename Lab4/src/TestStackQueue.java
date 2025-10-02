@@ -1,3 +1,5 @@
+package s6722781059_LAB04;
+
 public class TestStackQueue {
 
     public static void main(String[] args) {
@@ -143,7 +145,7 @@ public class TestStackQueue {
         P.enqueue("P4");
         P.enqueue("P5");
         P.enqueue("P6");
-        int amount = 40;
+        int amount = 4;
         int quota = 3;
         System.out.println("Your result is ");
         QueueApp.makeRoundRobin(RRB, P, quota, amount );
