@@ -1,3 +1,5 @@
+package s6722781059_LAB04;
+
 public class QueueApp {
     /**
      * Checks if a given string represents an integer.
@@ -71,15 +73,44 @@ public class QueueApp {
 
         // Exercise 4
         // Replace the following line with your codes
-//        String temp = Q.dequeue();
-//        if (temp=="+" || temp=="-" || temp=="*" || temp=="/" || temp=="%"){
-//            for(int i=1; i<input.length; i++){
-//                if
-//            }
-//        }
-
-
-        return null;
+        String x, y, z;
+        x = Q.dequeue(); y = Q.dequeue(); z = Q.dequeue();
+        String temp;
+        
+        if(Q.isEmpty()) {
+        	if(isPrefix(x, y, z)) return evalPrefixString(x, y, z);
+        	
+        }
+        else {
+        	while(!Q.isEmpty()) {
+        		if(isPrefix(x, y, z)) {
+	        		temp = evalPrefixString(x, y, z);
+	        		Q.enqueue(temp);
+	        		x = Q.dequeue(); y = Q.dequeue(); z = Q.dequeue();
+        		}
+        		else {
+        			Q.enqueue(x);
+        			x = y; y = z; z = Q.dequeue();
+        		}
+//        		Q.printHorizontal();
+//        		System.out.println();
+        	}
+        	
+        	while(!isPrefix(x, y, z)) {
+        	Q.enqueue(x);
+        	x = y;
+        	y = z;
+        	z = Q.dequeue();
+        	}
+        	temp = evalPrefixString(x, y, z);
+        	Q.enqueue(temp);
+        
+        }
+        
+        
+        if(!Q.isEmpty()) return evalPrefixString(x, y, z);
+        else return null;
+        
     }
 
 
@@ -94,26 +125,28 @@ public class QueueApp {
         {    int temp =Q.dequeue();
             String name = P.dequeue();
             if( limit<=resourceAmt)
-            {  if(temp >= limit)
+            {  if(temp > limit)
             {  //add your codes here
-
-
+            	temp -= limit;
+            	Q.enqueue(temp);
+            	P.enqueue(name);
+            	resourceAmt -= limit;
 
                 printRoundRobin(Q, P, resourceAmt);
             }
             else
             {  //add your code here
-
+            	resourceAmt -= temp;
 
                 printRoundRobin(Q, P, resourceAmt);
             }
             }
             else{  if(temp>resourceAmt)
             {   //add your code here
-
-
-
-
+            	temp -= resourceAmt;
+            	Q.enqueue(temp);
+            	P.enqueue(name);
+            	resourceAmt = 0;
 
             }
             else
