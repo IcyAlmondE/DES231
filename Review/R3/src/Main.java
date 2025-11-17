@@ -107,16 +107,19 @@ public class Main {
             size++;
         }
 
-        void removeFirst(){
-            if(first==null) return;
+        T removeFirst(){
+            if(first==null) return null;
+            T val = first.element;
             Node<T> temp = first.next;
             first.next = null;
             first = temp;
             size--;
+            return val;
         }
 
-        void removeLast(){
-            if(last==null) return;
+        T removeLast(){
+            if(last==null) return null;
+            T val = last.element;
             Node<T> temp = first;
             for(int i=0; i<size-2; i++){
                 temp = temp.next;
@@ -124,19 +127,23 @@ public class Main {
             temp.next = null;
             last = temp;
             size--;
+            return val;
         }
 
-        void removeAtIndex(int index){
-            if(index==0) removeFirst();
-            else if(index==size-1) removeLast();
+        T removeAtIndex(int index){
+            T val;
+            if(index==0) val = removeFirst();
+            else if(index==size-1) val = removeLast();
             else{
                 Node<T> temp = first;
                 for(int i=0; i<index-1; i++){
                     temp = temp.next;
                 }
+                val = temp.next.element;
                 temp.next = temp.next.next;
                 size--;
             }
+            return val;
         }
 
         void reverse(){
